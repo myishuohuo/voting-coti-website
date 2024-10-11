@@ -1,0 +1,15 @@
+import config from './config';
+export const OSS_UPLOAD = config.OSS_UPLOAD;
+export const OSS_DOWNLOAD = config.OSS_DOWNLOAD;
+export const OSS_TOKEN = config.OSS_TOKEN;
+export const CONTRACT_ADDRESS = config.CONTRACT_ADDRESS;
+export const ETHER_SCAN = config.ETHER_SCAN;
+export const TOKEN_ADDRESS = config.TOKEN_ADDRESS;
+export const RPC_URL = config.RPC_URL;
+export const NETWORK_ID = config.NETWORK_ID;
+export const NETWORK_NAME = config.NETWORK_NAME;
+export const NATIVE_CURRENCY = config.NATIVE_CURRENCY;
+export const FHET_FAUCET = config.FHET_FAUCET;
+export const ETH_FAUCET = config.ETH_FAUCET;
+export const REVEAL_URL = config.REVEAL_URL;
+export const REVEAL_CHECK = config.REVEAL_CHECK;

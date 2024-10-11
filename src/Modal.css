@@ -1,0 +1,84 @@
+/* Modal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px; /* Adjust width as needed */
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+.close-button {
+    position: absolute;
+    right: -10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-content {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: rgb(62, 53, 53);
+    flex: 0 0 100px; /* Width of the label */
+    text-align: right;
+    padding-top: 5px;
+}
+
+.modal-content label {
+    display: flex;
+    /* align-items: center; */
+    margin-bottom: 15px;
+}
+
+.modal-input, .modal-textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.save-button {
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #45a049;
+}

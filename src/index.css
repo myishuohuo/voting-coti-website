@@ -1,0 +1,21 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.App-header {
+  text-align: center;
+}
+
+section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.5em;
+}
