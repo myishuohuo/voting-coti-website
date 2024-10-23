@@ -9,8 +9,19 @@ import { addNetwork, claimEth, claimFhet } from './utils';
 import token_json from './contracts/FHEToken.json';
 import { Tooltip } from 'react-tooltip';
 import Modal from './Modal';
-import { createFhevmInstance,getInstance } from './fhevmjs';
-import {CONTRACT_ADDRESS, ETHER_SCAN, TOKEN_ADDRESS, REVEAL_CHECK, NETWORK_ID, NETWORK_NAME, NATIVE_CURRENCY } from './constants';
+import { itUint, Wallet } from "@coti-io/coti-ethers"
+import {
+    CONTRACT_ADDRESS,
+    ETHER_SCAN,
+    TOKEN_ADDRESS,
+    REVEAL_CHECK,
+    NETWORK_ID,
+    NETWORK_NAME,
+    NATIVE_CURRENCY,
+    ETH_FAUCET
+} from './constants';
+import {setupAccount} from "./onboard";
+import {bigIntToBytes} from "fhevmjs/lib/utils";
 function App() {
     const [isInitialized, setIsInitialized] = useState(false);
     const abi = contract_json.abi;
@@ -18,6 +29,7 @@ function App() {
     const [blockNumber, setBlockNumber] = useState("");
     const [balance, setBalance] = useState(null);
     const [fhetBalance, setFhetBalance] = useState(null);
+    const [cotiWallet, setCotiWallet] = useState(null);
     const [networkName, setNetworkName] = useState("");
     const [totalVoters, setTotalVoters] = useState(0);
     const [voters, setVoters] = useState([]);
@@ -82,11 +94,7 @@ function App() {
     }
 
   useEffect(() => {
-    init()
-      .then(() => {
-        setIsInitialized(true);
-      })
-      .catch(() => setIsInitialized(false));
+      setIsInitialized(true);
   }, []);
     useEffect(() => {
         const loadProvider = async () => {
@@ -159,9 +167,10 @@ function App() {
                 console.error('Error loading provider:', error);
             }
         };
-
         loadProvider();
     }, []);
+
+
 
     useEffect(() => {
         const loadBalance = async () => {
@@ -172,6 +181,8 @@ function App() {
                     return
                 }
                 setAccount(accounts[0]);
+                const wallet = await setupAccount(accounts[0]);
+                setCotiWallet(wallet)
                 const balance = await web3.eth.getBalance(accounts[0]);
                 const fhet_balance = await token_contract.methods.balanceOf(accounts[0]).call();
                 setFhetBalance(web3.utils.fromWei(fhet_balance, "mwei"))
@@ -239,11 +250,9 @@ function App() {
                     // showCloseButton: true,
                     showCancelButton: false
                 });
-
-                const instances = getInstance();
-                const { handles, inputProof } = instances.createEncryptedInput(CONTRACT_ADDRESS, account).add64(voteType).encrypt();;
-                console.log(handles)
-                console.log(inputProof)
+                const { ciphertext, signature } = await cotiWallet.encryptValue(BigInt(voteType), CONTRACT_ADDRESS, "0x055965dd") as itUint
+                console.log(ciphertext)
+                console.log(signature)
                 // let encrypted = await encrypt(voteType)
                 // let hash = await upload(encrypted);
                 // if (hash == null) {
@@ -255,7 +264,7 @@ function App() {
 
 
 
-                let tx = await contract.methods.castVoteByProof(selectedProposalId, handles[0], inputProof).send({
+                let tx = await contract.methods.castVoteByProof(selectedProposalId, ciphertext, signature).send({
                     from: account,
                     gas: gasLimit,
                     gasPrice: gasPrice
@@ -328,7 +337,7 @@ function App() {
 
                 const gasLimit = 2000000; // Adjust this value as needed
                 const gasPrice = await web3.eth.getGasPrice(); // You can set a custom gas price if needed
-                let tx =  await contract.methods.propose(targets, values, signatures, calldatas, description, 0, 100).send({
+                let tx =  await contract.methods.propose(targets, values, signatures, calldatas, description, 0, 200).send({
                     from: account,
                     gas: gasLimit,
                     gasPrice: gasPrice,
@@ -374,7 +383,7 @@ function App() {
         claimFhet(account, setModalProcessing);
     };
     const handleClaimEth = () => {
-        window.open('https://faucet.zama.ai/', '_blank');
+        window.open(ETH_FAUCET, '_blank');
         // claimEth(account, setModalProcessing);
     };
 
@@ -480,7 +489,6 @@ function App() {
         }
     }
 
-    createFhevmInstance();
 
   if (!isInitialized) return null;
 
@@ -489,7 +497,7 @@ function App() {
             <header className="App-header">
                 <div className="voting-dapp-container">
                     <div className="voting-dapp">
-                        <h1>Private Voting dApp using FHE</h1>
+                        <h1>Private Voting dApp using COTI</h1>
                         <a href={`${ETHER_SCAN}/address/${CONTRACT_ADDRESS}`} className="download-link">
                             <img src={etherscanLogo} alt="etherscan" className="etherscan-icon" />
                         </a>
