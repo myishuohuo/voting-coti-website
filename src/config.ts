@@ -8,7 +8,7 @@ const CONFIG = {
     CONTRACT_ADDRESS : "0x79E0262EEf020582A4B758d4216984d0Ad478aF9",
     ETHER_SCAN : "https://devnet.cotiscan.io",
     TOKEN_ADDRESS : "0x54Eaa7725941b6ECAf957f8544622ea781875a26",
-    RPC_URL : 'https://devnet.coti.io/rpc',
+    RPC_URL : 'https://mrvybbqwfhxq.cloud.sealos.io/devnet/rpc',
     REVEAL_URL : 'https://gekxkweniswi.cloud.sealos.io/eth/decryptProposal',
     REVEAL_CHECK : 'https://gekxkweniswi.cloud.sealos.io/eth/getDecryptState',
     NETWORK_ID : "13068200",
