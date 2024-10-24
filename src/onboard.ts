@@ -14,7 +14,7 @@ export async function setupAccount(address: string) {
     }
     const browserProvider = new BrowserProvider(provider);
 
-    const wallet: JsonRpcSigner = await provider.getSigner(0);
+    const wallet: JsonRpcSigner = await browserProvider.getSigner(address);
 
     let aeskey = sessionStorage.getItem("aeskey " + address)
     if (aeskey) {
