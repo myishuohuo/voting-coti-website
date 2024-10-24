@@ -1,5 +1,6 @@
 import { isAddress } from 'ethers';
 import { initFhevm, createInstance, FhevmInstance } from 'fhevmjs';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 export type Keypair = {
   publicKey: string;
@@ -23,8 +24,14 @@ let instance: FhevmInstance;
 const keypairs: Keypairs = {};
 
 export const createFhevmInstance = async () => {
+  let provider;
+  if (window.okexchain) {
+    provider = window.okexchain;
+  }else{
+    provider = await detectEthereumProvider();
+  }
   if (instancePromise) return instancePromise;
-  instancePromise = createInstance({ network: window.ethereum });
+  instancePromise = createInstance({ network: provider });
   instance = await instancePromise;
 };
 
