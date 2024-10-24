@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { init } from './fhevmjs';
 import Web3 from 'web3';
 import './App.css';
 import etherscanLogo from './logo-etherscan-light.svg';
+import detectEthereumProvider from '@metamask/detect-provider';
 import Swal from 'sweetalert2';
 import contract_json from './contracts/FHEGovernor.json';
 import { addNetwork, claimEth, claimFhet } from './utils';
@@ -14,14 +14,12 @@ import {
     CONTRACT_ADDRESS,
     ETHER_SCAN,
     TOKEN_ADDRESS,
-    REVEAL_CHECK,
     NETWORK_ID,
     NETWORK_NAME,
     NATIVE_CURRENCY,
     ETH_FAUCET
 } from './constants';
 import {setupAccount} from "./onboard";
-import {bigIntToBytes} from "fhevmjs/lib/utils";
 function App() {
     const [isInitialized, setIsInitialized] = useState(false);
     const abi = contract_json.abi;
@@ -99,7 +97,12 @@ function App() {
     useEffect(() => {
         const loadProvider = async () => {
             try {
-                const provider = window.ethereum;
+                let provider;
+                if (window.okexchain) {
+                    provider = window.okexchain;
+                }else{
+                    provider = await detectEthereumProvider();
+                }
 
                 try {
                     await provider.request({ method: 'eth_requestAccounts' });

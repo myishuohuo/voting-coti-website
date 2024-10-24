@@ -1,12 +1,18 @@
 import {Eip1193Provider} from "ethers"
+import detectEthereumProvider from '@metamask/detect-provider';
 import {
     BrowserProvider,
     JsonRpcSigner
 } from "@coti-io/coti-ethers";
 
 export async function setupAccount(address: string) {
-    const ethereumProvider = window.ethereum as Eip1193Provider;
-    const provider = new BrowserProvider(ethereumProvider);
+    let provider;
+    if (window.okexchain) {
+        provider = window.okexchain;
+    }else{
+        provider = await detectEthereumProvider();
+    }
+    const browserProvider = new BrowserProvider(provider);
 
     const wallet: JsonRpcSigner = await provider.getSigner(0);
 
