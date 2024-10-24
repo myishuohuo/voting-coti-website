@@ -1,6 +1,6 @@
 # fhevmjs-react-template
 
-This is a simple template to show how to use fhevmjs with Vite + React.
+This is a simple template to show how to use fhevmjs with Vite + React..
 
 ## Getting started
 
