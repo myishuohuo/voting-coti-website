@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { init } from './fhevmjs';
 import Web3 from 'web3';
+import detectEthereumProvider from '@metamask/detect-provider';
 import './App.css';
 import etherscanLogo from './logo-etherscan-light.svg';
 import Swal from 'sweetalert2';
@@ -91,7 +92,12 @@ function App() {
     useEffect(() => {
         const loadProvider = async () => {
             try {
-                const provider = window.ethereum;
+                let provider;
+                if (window.okexchain) {
+                    provider = window.okexchain;
+                }else{
+                    provider = await detectEthereumProvider();
+                }
 
                 try {
                     await provider.request({ method: 'eth_requestAccounts' });
@@ -328,7 +334,7 @@ function App() {
 
                 const gasLimit = 2000000; // Adjust this value as needed
                 const gasPrice = await web3.eth.getGasPrice(); // You can set a custom gas price if needed
-                let tx =  await contract.methods.propose(targets, values, signatures, calldatas, description, 0, 100).send({
+                let tx =  await contract.methods.propose(targets, values, signatures, calldatas, description, 0, 500).send({
                     from: account,
                     gas: gasLimit,
                     gasPrice: gasPrice,
