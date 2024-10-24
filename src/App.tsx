@@ -313,6 +313,7 @@ function App() {
                 if (!contract || !web3) {
                     throw new Error("Contract or web3 instance not defined");
                 }
+                var proposalDesc = prompt("Please enter the proposal information", "This is a test proposal");
                 Swal.fire({
                     title: 'Transaction is sending...',
                     text: 'Please wait while your data is being uploaded.',
@@ -329,7 +330,7 @@ function App() {
                 let values = [1000000000000000000];
                 let signatures = ["0x"];
                 let calldatas = ["0x"];
-                let description = "test propose";
+                let description = proposalDesc;
 
 
                 const gasLimit = 2000000; // Adjust this value as needed
