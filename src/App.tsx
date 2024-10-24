@@ -13,6 +13,7 @@ import { itUint, Wallet } from "@coti-io/coti-ethers"
 import {
     CONTRACT_ADDRESS,
     ETHER_SCAN,
+    FHEVM_URL,
     TOKEN_ADDRESS,
     NETWORK_ID,
     NETWORK_NAME,
@@ -387,7 +388,9 @@ function App() {
     };
     const handleClaimEth = () => {
         window.open(ETH_FAUCET, '_blank');
-        // claimEth(account, setModalProcessing);
+    };
+    const handleToFhevm = () => {
+        window.open(FHEVM_URL, '_blank');
     };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -500,6 +503,9 @@ function App() {
             <header className="App-header">
                 <div className="voting-dapp-container">
                     <div className="voting-dapp">
+                        <a href={`${FHEVM_URL}`} className="download-link" target="_blank">
+                            TO_FHEVM
+                        </a>
                         <h1>Private Voting dApp using COTI</h1>
                         <a href={`${ETHER_SCAN}/address/${CONTRACT_ADDRESS}`} className="download-link">
                             <img src={etherscanLogo} alt="etherscan" className="etherscan-icon" />

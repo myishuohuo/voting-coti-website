@@ -11,5 +11,6 @@ export const NETWORK_NAME = config.NETWORK_NAME;
 export const NATIVE_CURRENCY = config.NATIVE_CURRENCY;
 export const FHET_FAUCET = config.FHET_FAUCET;
 export const ETH_FAUCET = config.ETH_FAUCET;
+export const FHEVM_URL = config.FHEVM_URL;
 export const REVEAL_URL = config.REVEAL_URL;
 export const REVEAL_CHECK = config.REVEAL_CHECK;
