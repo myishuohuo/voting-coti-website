@@ -495,7 +495,7 @@ function App() {
             <header className="App-header">
                 <div className="voting-dapp-container">
                     <div className="voting-dapp">
-                        <h1>Private Voting dApp using FHE</h1>
+                        <h1>Private Voting dApp using FHEVM</h1>
                         <a href={`${ETHER_SCAN}/address/${CONTRACT_ADDRESS}`} className="download-link">
                             <img src={etherscanLogo} alt="etherscan" className="etherscan-icon" />
                         </a>
