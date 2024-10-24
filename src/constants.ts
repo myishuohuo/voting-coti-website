@@ -4,6 +4,7 @@ export const OSS_DOWNLOAD = config.OSS_DOWNLOAD;
 export const OSS_TOKEN = config.OSS_TOKEN;
 export const CONTRACT_ADDRESS = config.CONTRACT_ADDRESS;
 export const ETHER_SCAN = config.ETHER_SCAN;
+export const COTI_URL = config.COTI_URL;
 export const TOKEN_ADDRESS = config.TOKEN_ADDRESS;
 export const RPC_URL = config.RPC_URL;
 export const NETWORK_ID = config.NETWORK_ID;

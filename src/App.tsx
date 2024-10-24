@@ -11,7 +11,7 @@ import token_json from './contracts/FHEToken.json';
 import { Tooltip } from 'react-tooltip';
 import Modal from './Modal';
 import { createFhevmInstance,getInstance } from './fhevmjs';
-import {CONTRACT_ADDRESS, ETHER_SCAN, TOKEN_ADDRESS, REVEAL_CHECK, NETWORK_ID, NETWORK_NAME, NATIVE_CURRENCY } from './constants';
+import {CONTRACT_ADDRESS, ETHER_SCAN, TOKEN_ADDRESS, REVEAL_CHECK, NETWORK_ID, NETWORK_NAME, NATIVE_CURRENCY,COTI_URL} from './constants';
 function App() {
     const [isInitialized, setIsInitialized] = useState(false);
     const abi = contract_json.abi;
@@ -107,7 +107,7 @@ function App() {
                 if (provider) {
                     setAccountListener(provider)
                     const web3 = new Web3(provider);
-                    const networkId = await web3.eth.net.getId();
+                    const networkId = await web3.eth.getChainId();
                     console.log(networkId)
                     const blockNumber = await web3.eth.getBlockNumber();
                     setBlockNumber(blockNumber.toString())
@@ -495,6 +495,9 @@ function App() {
             <header className="App-header">
                 <div className="voting-dapp-container">
                     <div className="voting-dapp">
+                        <a href={`${COTI_URL}`} className="download-link" target="_blank">
+                            TO_COTI
+                        </a>
                         <h1>Private Voting dApp using FHEVM</h1>
                         <a href={`${ETHER_SCAN}/address/${CONTRACT_ADDRESS}`} className="download-link">
                             <img src={etherscanLogo} alt="etherscan" className="etherscan-icon" />
