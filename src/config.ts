@@ -4,7 +4,7 @@ const CONFIG = {
     OSS_DOWNLOAD : "https://gekxkweniswi.cloud.sealos.io/filedownload",
     FHET_FAUCET : "https://gekxkweniswi.cloud.sealos.io/coti/claimtoken",
     ETH_FAUCET : "https://faucet.coti.io/",
-    FHEVM_URL : "https://faucet.coti.io/",
+    FHEVM_URL : "https://voting-fhevm-website.vercel.app/",
     OSS_TOKEN : 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiIxMjM0NTYiLCJleHAiOjE3MjMzNTU2NjZ9.jSSgZOz7ieR2pSuMRNQ-hWQ3XFSEa32CZTV743LeVf2SKe-nA60z7Ruk_VFqvj00rGy0_tFDTWlp-aVcRguEiQ',
     CONTRACT_ADDRESS : "0x79E0262EEf020582A4B758d4216984d0Ad478aF9",
     ETHER_SCAN : "https://devnet.cotiscan.io",
