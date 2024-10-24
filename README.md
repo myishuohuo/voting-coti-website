@@ -1,4 +1,4 @@
-# fhevmjs-react-template
+# voting-coti-website
 
 This is a simple template to show how to use fhevmjs with Vite + React.
 
