@@ -409,7 +409,7 @@ li {
 .download-link {
   color: rgb(222, 222, 230);
   /* 设置链接的颜色 */
-  text-decoration: underline;
+  text-decoration: #4caf50;
   /* 添加下划线 */
 }
 
