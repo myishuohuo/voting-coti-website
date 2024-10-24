@@ -185,6 +185,7 @@ function App() {
                     return
                 }
                 setAccount(accounts[0]);
+
                 const wallet = await setupAccount(accounts[0]);
                 setCotiWallet(wallet)
                 const balance = await web3.eth.getBalance(accounts[0]);
@@ -192,6 +193,7 @@ function App() {
                 setFhetBalance(web3.utils.fromWei(fhet_balance, "mwei"))
                 setCanPropose(fhet_balance > 0)
                 setBalance(parseFloat(web3.utils.fromWei(balance, "ether")).toFixed(6))
+
             }
         }
         web3Api.contract && loadBalance()
@@ -255,13 +257,10 @@ function App() {
                     showCancelButton: false
                 });
                 const { ciphertext, signature } = await cotiWallet.encryptValue(BigInt(voteType), CONTRACT_ADDRESS, "0x055965dd") as itUint
-                console.log(ciphertext)
-                console.log(signature)
-                // let encrypted = await encrypt(voteType)
-                // let hash = await upload(encrypted);
-                // if (hash == null) {
-                //     throw new Error("Encrypted file upload failed");
-                // }
+                if (cotiWallet.getUserOnboardInfo()?.aesKey) {
+                    sessionStorage.setItem("aeskey " + account, cotiWallet.getUserOnboardInfo()?.aesKey)
+                }
+
 
                 const gasLimit = 8000000; // Adjust this value as needed
                 const gasPrice = await web3.eth.getGasPrice(); // You can set a custom gas price if needed
@@ -320,6 +319,8 @@ function App() {
                 if (!contract || !web3) {
                     throw new Error("Contract or web3 instance not defined");
                 }
+                var proposalDesc = prompt("Please enter the proposal information", "This is a test proposal");
+
                 Swal.fire({
                     title: 'Transaction is sending...',
                     text: 'Please wait while your data is being uploaded.',
@@ -336,7 +337,7 @@ function App() {
                 let values = [1000000000000000000];
                 let signatures = ["0x"];
                 let calldatas = ["0x"];
-                let description = "test propose";
+                let description = proposalDesc;
 
 
                 const gasLimit = 2000000; // Adjust this value as needed

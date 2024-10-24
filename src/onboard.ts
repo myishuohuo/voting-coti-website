@@ -20,11 +20,9 @@ export async function setupAccount(address: string) {
     if (aeskey) {
         wallet.setAesKey(aeskey)
         console.log("aeskey exist:")
-        return wallet
     }
-    await wallet.generateOrRecoverAes()
-
-    sessionStorage.setItem("aeskey " + address, wallet.getUserOnboardInfo()?.aesKey)
-    console.log("aeskey not exist:")
+    // await wallet.generateOrRecoverAes()
+    // sessionStorage.setItem("aeskey " + address, wallet.getUserOnboardInfo()?.aesKey)
+    // console.log("aeskey not exist:")
     return wallet
 }
