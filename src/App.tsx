@@ -112,7 +112,7 @@ function App() {
                 if (provider) {
                     setAccountListener(provider)
                     const web3 = new Web3(provider);
-                    const networkId = await web3.eth.net.getId();
+                    const networkId = await web3.eth.getChainId();
                     console.log(networkId)
                     const blockNumber = await web3.eth.getBlockNumber();
                     setBlockNumber(blockNumber.toString())
