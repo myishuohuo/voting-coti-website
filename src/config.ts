@@ -11,7 +11,7 @@ const CONFIG = {
     RPC_URL : 'https://devnet.coti.io/rpc',
     REVEAL_URL : 'https://gekxkweniswi.cloud.sealos.io/eth/decryptProposal',
     REVEAL_CHECK : 'https://gekxkweniswi.cloud.sealos.io/eth/getDecryptState',
-    NETWORK_ID : "123456",
+    NETWORK_ID : "7082400",
     NETWORK_NAME : "COTI Devnet",
     NATIVE_CURRENCY : "COTI2"
   };
